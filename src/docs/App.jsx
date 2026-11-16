@@ -471,37 +471,6 @@ function Components() {
           <p className="cr-section-subtitle">Trayectoria en diseño de producto</p>
         </div>
       </Demo>
-
-      <Demo
-        title="Item de línea de tiempo"
-        note="El modificador cr-timeline-item--current marca el item actual con el punto naranja. Sin el modificador, el punto es el de marca y se usa para los items anteriores."
-        code={`<!-- Actual -->
-<div class="cr-timeline-item cr-timeline-item--current">
-  <span class="cr-timeline-item__dot"></span>
-  <div class="cr-card">…</div>
-</div>
-
-<!-- Anterior -->
-<div class="cr-timeline-item">
-  <span class="cr-timeline-item__dot"></span>
-  <div class="cr-card">…</div>
-</div>`}
-      >
-        <div className="cr-timeline-item cr-timeline-item--current docs-card-demo">
-          <span className="cr-timeline-item__dot" />
-          <div className="cr-card">
-            <h3 className="cr-card__title">Sr. Diseñadora UX/UI</h3>
-            <p className="cr-card__text">Oct 2021 – Hoy</p>
-          </div>
-        </div>
-        <div className="cr-timeline-item docs-card-demo">
-          <span className="cr-timeline-item__dot" />
-          <div className="cr-card">
-            <h3 className="cr-card__title">Diseñadora UI y Desarrolladora Web</h3>
-            <p className="cr-card__text">Feb 2018 – Sep 2021</p>
-          </div>
-        </div>
-      </Demo>
     </Section>
   )
 }
@@ -650,10 +619,87 @@ function SelectorsMatrix() {
   )
 }
 
+/* Devuelve el id de la sección donde está parada la persona (null si todavía no llegó a la primera) */
+function useActiveSection(ids) {
+  const [active, setActive] = useState(null)
+  const key = ids.join()
+
+  useEffect(() => {
+    if (!ids.length) return undefined
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const line = window.innerHeight * 0.35
+      let current = null
+      for (const id of ids) {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= line) current = id
+      }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = ids[ids.length - 1]
+      setActive(current)
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key])
+
+  return active
+}
+
+function ArrowUpIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+      <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
+  )
+}
+
+/* Flecha flotante: aparece al llegar a la última sección y vuelve al inicio con scroll suave */
+function BackToTop() {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const check = () => {
+      const last = document.querySelector('main > section:last-of-type')
+      setVisible(last ? last.getBoundingClientRect().top < window.innerHeight : window.scrollY > window.innerHeight)
+    }
+    check()
+    window.addEventListener('scroll', check, { passive: true })
+    window.addEventListener('resize', check)
+    return () => {
+      window.removeEventListener('scroll', check)
+      window.removeEventListener('resize', check)
+    }
+  }, [])
+
+  function goTop() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+    document.getElementById('main')?.focus({ preventScroll: true })
+  }
+
+  return (
+    <button type="button" className="docs-back-to-top" data-visible={visible} onClick={goTop} aria-label="Ir hacia arriba">
+      <ArrowUpIcon />
+      <span className="docs-back-to-top-tip" aria-hidden="true">Ir hacia arriba</span>
+    </button>
+  )
+}
+
 export default function App() {
   const [theme, setTheme] = useState(document.documentElement.dataset.theme)
   const [menuOpen, setMenuOpen] = useState(false)
   const toggleRef = useRef(null)
+  const active = useActiveSection(NAV.map(([id]) => id))
 
   useEffect(() => {
     if (!menuOpen) return
@@ -676,11 +722,11 @@ export default function App() {
     <div className="docs-layout">
       <a className="docs-skip" href="#main">Saltar al contenido</a>
       <header className="docs-header">
-        <a href="#overview" className="docs-brand">Cynthia<span>.</span> <small>design system</small></a>
+        <a href="#overview" className="docs-brand"><span className="docs-brand-text">Cynthia<span>.</span> <small>design system</small></span></a>
         <nav aria-label="Secciones">
           <ul id="docs-nav-menu" className={`docs-nav${menuOpen ? ' is-open' : ''}`}>
             {NAV.map(([id, label]) => (
-              <li key={id}><a href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a></li>
+              <li key={id}><a href={`#${id}`} aria-current={active === id ? 'location' : undefined} onClick={() => setMenuOpen(false)}>{label}</a></li>
             ))}
           </ul>
         </nav>
@@ -689,12 +735,15 @@ export default function App() {
           <button
             type="button"
             ref={toggleRef}
-            className="cr-btn cr-btn--secondary docs-nav-toggle"
+            className="docs-nav-toggle"
             aria-expanded={menuOpen}
             aria-controls="docs-nav-menu"
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            Menú
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
+              {menuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+            </svg>
           </button>
         </div>
       </header>
@@ -737,6 +786,7 @@ export default function App() {
         <Components />
       </main>
 
+      <BackToTop />
       <footer className="docs-footer">
         <p>© {new Date().getFullYear()} Cynthia Rivero · Design system personal · Diseñada con <span role="img" aria-label="amor">♥</span> en Buenos Aires</p>
         <p>Actualizado: <time dateTime="2026-11-16">16 de noviembre de 2026</time></p>
