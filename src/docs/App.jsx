@@ -749,27 +749,30 @@ export default function App() {
       </header>
 
       <main id="main" tabIndex={-1} className="docs-main">
-        <section id="overview" className="docs-hero">
-          <p className="cr-card__eyebrow">v1.0.0 · Design system personal</p>
+        <header className="docs-hero">
+          <p className="cr-card__eyebrow">v1.1.0 · Design system personal</p>
           <h1 className="docs-title">Un sistema, dos modos, accesible desde el token.</h1>
-          <p className="docs-lead">
-            Base visual de mi portfolio: paleta azul, celeste y naranja, tres familias tipográficas (títulos, texto y
-            código) y componentes construidos sobre tokens en capas, validados contra WCAG 2.2.
-          </p>
+        </header>
+
+        <Section
+          id="overview"
+          title="Principios"
+          intro="Base visual de mi portfolio: paleta azul, celeste y naranja, tres familias tipográficas (títulos, texto y código) y componentes construidos sobre tokens en capas, validados contra WCAG 2.2."
+        >
           <div className="docs-layers">
             <div className="cr-card">
               <p className="cr-card__eyebrow">Capa 1</p>
-              <h2 className="cr-card__title">Primitivos</h2>
+              <h3 className="cr-card__title">Primitivos</h3>
               <p className="cr-card__text">Valores crudos: paletas de 11 tonos, espaciado, radios, tipografía. Ej: <code>--blue-700</code>.</p>
             </div>
             <div className="cr-card">
               <p className="cr-card__eyebrow">Capa 2</p>
-              <h2 className="cr-card__title">Semánticos</h2>
+              <h3 className="cr-card__title">Semánticos</h3>
               <p className="cr-card__text">Describen el uso y tienen modo claro y oscuro. Ej: <code>--color-brand</code>.</p>
             </div>
             <div className="cr-card">
               <p className="cr-card__eyebrow">Capa 3</p>
-              <h2 className="cr-card__title">Componentes</h2>
+              <h3 className="cr-card__title">Componentes</h3>
               <p className="cr-card__text">Tokens por componente apuntando a la capa semántica. Ej: <code>--button-radius</code>.</p>
             </div>
           </div>
@@ -777,7 +780,7 @@ export default function App() {
 @import './css/components.css'; /* clases cr-* */
 
 <html data-theme="light"> /* o "dark" */`}</Code>
-        </section>
+        </Section>
 
         <Colors />
         <Accessibility />

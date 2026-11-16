@@ -140,7 +140,23 @@
 .docs-code:focus-visible { outline: var(--focus-ring-width) solid var(--cyan-300); outline-offset: 2px; }
 
 .docs-main { max-width: 1080px; margin: 0 auto; padding: 0 var(--space-6); }
-.docs-hero { padding: calc(var(--space-16) + 40px) 0 var(--space-8); }
+.docs-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 70svh;
+  /* El primer valor compensa el nav flotante para que el texto quede centrado en el espacio visible */
+  padding: calc(84px + var(--space-12)) 0 var(--space-12);
+}
+.docs-hero .docs-title { margin-bottom: 0; }
+/* Fondo gray-50 a ancho completo; en modo oscuro usa la superficie sutil del tema */
+.docs-hero {
+  --hero-bg: var(--gray-50);
+  background: var(--hero-bg);
+  box-shadow: 0 0 0 100vmax var(--hero-bg);
+  clip-path: inset(0 -100vmax);
+}
+:root[data-theme="dark"] .docs-hero { --hero-bg: var(--color-bg-subtle); }
 .docs-title {
   margin: 0 0 var(--space-4);
   max-width: 30ch;

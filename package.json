@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "cynthia-design-system",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "description": "Design system personal de Cynthia Rivero: tokens en capas, componentes y documentaciÃ³n.",
   "scripts": {
