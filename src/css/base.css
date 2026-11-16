@@ -1,0 +1,21 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+
+@media (max-width: 768px) {
+  html { scroll-padding-top: 10rem; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-normal);
+  background: var(--color-bg-page);
+  color: var(--color-text-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
