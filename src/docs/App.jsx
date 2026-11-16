@@ -140,7 +140,9 @@ function Colors() {
 
       <h3 className="docs-h3 docs-h3--lg">Tokens semánticos</h3>
       <p className="docs-note">
-        Describen el uso, no el valor. Cambiá el modo arriba a la derecha: los nombres no cambian, los valores sí.
+        Describen el uso, no el valor. Cambiá el modo arriba a la derecha: los nombres no cambian, los valores sí.{' '}
+        <code>color-bg-subtle</code> (bandas de sección) y <code>color-surface-muted</code> (elementos dentro de una sección o card)
+        coinciden en claro y se separan en oscuro.
       </p>
       {SEMANTIC.map(([group, tokens]) => (
         <div key={group} className="docs-block">
