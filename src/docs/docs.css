@@ -19,6 +19,14 @@
 .docs-brand small { font-weight: var(--font-weight-regular); color: var(--color-text-muted); font-size: var(--font-size-sm); }
 .docs-nav { display: flex; gap: var(--space-5); list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
 .docs-nav a { color: var(--color-text-body); text-decoration: none; font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); }
+.docs-nav a:hover,
+.docs-nav a:focus-visible,
+.docs-brand:hover,
+.docs-brand:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
 .docs-nav a:hover { color: var(--color-brand); }
 .docs-nav a:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-ring); outline-offset: var(--focus-ring-offset); }
 .docs-theme { margin-left: auto; }

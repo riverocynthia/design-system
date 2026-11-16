@@ -362,10 +362,13 @@ function Components() {
 
       <Demo
         title="Link de contacto"
-        code={`<a class="cr-contact-link" href="mailto:hola@ejemplo.com">hola@ejemplo.com</a>`}
+        note="El texto se subraya al pasar el mouse o enfocar con teclado. Si hay un ícono, va fuera de cr-contact-link__text para que no se subraye."
+        code={`<a class="cr-contact-link" href="mailto:hola@ejemplo.com">
+  <span class="cr-contact-link__text">hola@ejemplo.com</span>
+</a>`}
       >
-        <a className="cr-contact-link" href="#components">hola@ejemplo.com</a>
-        <a className="cr-contact-link" href="#components">linkedin.com/in/usuario</a>
+        <a className="cr-contact-link" href="#components"><span className="cr-contact-link__text">hola@ejemplo.com</span></a>
+        <a className="cr-contact-link" href="#components"><span className="cr-contact-link__text">linkedin.com/in/usuario</span></a>
       </Demo>
 
       <Demo

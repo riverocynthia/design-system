@@ -201,7 +201,15 @@
   text-decoration: none;
   transition: border-color var(--duration-base) var(--easing-standard);
 }
-.cr-contact-link:hover { border-color: var(--color-brand); color: var(--color-brand); }
+.cr-contact-link:hover,
+.cr-contact-link:focus-visible { border-color: var(--color-brand); color: var(--color-brand); }
+
+.cr-contact-link:hover .cr-contact-link__text,
+.cr-contact-link:focus-visible .cr-contact-link__text {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
 
 .cr-section-title {
   margin: 0 0 var(--space-2);
