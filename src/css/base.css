@@ -2,17 +2,44 @@
 
 html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 
-@media (max-width: 768px) {
-  html { scroll-padding-top: 10rem; }
-}
-
 body {
   margin: 0;
-  font-family: var(--font-family-sans);
+  font-family: var(--font-family-body);
   font-size: var(--font-size-md);
   line-height: var(--line-height-normal);
   background: var(--color-bg-page);
   color: var(--color-text-body);
+}
+
+/* Encabezados: un nivel semántico por tamaño de la escala tipográfica */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  color: var(--color-text-primary);
+}
+
+h1, .cr-display {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.cr-display { font-size: var(--font-size-5xl); }
+
+h2 { font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold); line-height: var(--line-height-snug); }
+h3 { font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); line-height: var(--line-height-snug); }
+h4 { font-size: var(--font-size-xl); font-weight: var(--font-weight-semibold); line-height: var(--line-height-snug); }
+h5 { font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); line-height: var(--line-height-snug); }
+h6 { font-size: var(--font-size-md); font-weight: var(--font-weight-bold); line-height: var(--line-height-snug); }
+
+@media (max-width: 768px) {
+  h1 { font-size: var(--font-size-3xl); }
+  .cr-display { font-size: var(--font-size-4xl); }
+}
+
+button, input, select, textarea {
+  font-family: var(--font-family-body);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -12,7 +12,7 @@ src/
     components.css   # Capa 3: tokens por componente (button-radius, card-padding…)
     index.css        # importa las tres capas
   css/
-    base.css         # reset mínimo
+    base.css         # reset mínimo y estilos de h1–h6 (más .cr-display para portadas)
     components.css   # clases cr-btn, cr-card, cr-tag…
   docs/              # sitio de documentación (React + Vite)
 ```
@@ -27,6 +27,8 @@ src/
 ```html
 <html data-theme="light"> <!-- o "dark" -->
 ```
+
+Para un fondo oscuro puntual dentro de una página clara (un héroe, un pie de página), envolvé el bloque en `.cr-on-dark`: remapea los tokens semánticos con los valores del modo oscuro y todos los componentes mantienen el contraste, sin variantes propias.
 
 ## Desarrollo
 
