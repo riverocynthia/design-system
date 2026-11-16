@@ -21,8 +21,7 @@
 .docs-nav a { color: var(--color-text-body); text-decoration: none; font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); }
 .docs-nav a:hover { color: var(--color-brand); }
 .docs-nav a:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-ring); outline-offset: var(--focus-ring-offset); }
-.docs-theme { margin-left: auto; padding: var(--space-2) var(--space-4); font-size: var(--font-size-sm); }
-.docs-theme[aria-pressed="true"] { background: var(--color-brand); color: var(--color-on-brand); }
+.docs-theme { margin-left: auto; }
 
 .docs-skip {
   position: absolute;

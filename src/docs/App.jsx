@@ -301,6 +301,18 @@ function Components() {
       </Demo>
 
       <Demo
+        title="Switch"
+        note="Un botón con role=&quot;switch&quot; y aria-checked. Los íconos de sol y luna muestran ambos estados; el selector marca el activo. Funciona con Espacio y Enter."
+        code={`<button type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" class="cr-switch">
+  <span class="cr-switch__icon cr-switch__icon--start"><!-- svg sol --></span>
+  <span class="cr-switch__icon cr-switch__icon--end"><!-- svg luna --></span>
+  <span class="cr-switch__thumb"><!-- svg del estado actual --></span>
+</button>`}
+      >
+        <SwitchDemo />
+      </Demo>
+
+      <Demo
         title="Link"
         code={`<a class="cr-link" href="#">Ver caso completo</a>`}
       >
@@ -386,6 +398,45 @@ function Components() {
   )
 }
 
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+    </svg>
+  )
+}
+
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+      <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+    </svg>
+  )
+}
+
+function ThemeSwitch({ checked, onChange, label = 'Modo oscuro', className = '' }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      className={`cr-switch ${className}`.trim()}
+      onClick={onChange}
+    >
+      <span className="cr-switch__icon cr-switch__icon--start"><SunIcon /></span>
+      <span className="cr-switch__icon cr-switch__icon--end"><MoonIcon /></span>
+      <span className="cr-switch__thumb">{checked ? <MoonIcon /> : <SunIcon />}</span>
+    </button>
+  )
+}
+
+function SwitchDemo() {
+  const [on, setOn] = useState(false)
+  return <ThemeSwitch checked={on} onChange={() => setOn(!on)} label="Modo oscuro (ejemplo)" />
+}
+
 export default function App() {
   const [theme, setTheme] = useState(document.documentElement.dataset.theme)
 
@@ -407,9 +458,7 @@ export default function App() {
             ))}
           </ul>
         </nav>
-        <button className="cr-btn cr-btn--secondary docs-theme" onClick={toggleTheme} aria-pressed={theme === 'dark'}>
-          Modo oscuro
-        </button>
+        <ThemeSwitch className="docs-theme" checked={theme === 'dark'} onChange={toggleTheme} />
       </header>
 
       <main id="main" tabIndex={-1} className="docs-main">
