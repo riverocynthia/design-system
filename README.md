@@ -30,6 +30,8 @@ src/
 
 Para un fondo oscuro puntual dentro de una página clara (un héroe, un pie de página), envolvé el bloque en `.cr-on-dark`: remapea los tokens semánticos con los valores del modo oscuro y todos los componentes mantienen el contraste, sin variantes propias.
 
+A la inversa, para un contenedor claro dentro de una página en modo oscuro (por ejemplo, una tarjeta blanca), envolvé el bloque en `.cr-on-light`: remapea los tokens semánticos con los valores del modo claro.
+
 ## Desarrollo
 
 ```bash

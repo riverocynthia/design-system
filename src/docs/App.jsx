@@ -318,12 +318,12 @@ function Spacing() {
   )
 }
 
-function Demo({ title, note, code, dark = false, children }) {
+function Demo({ title, note, code, dark = false, light = false, children }) {
   return (
     <div className="docs-demo">
       <h3 className="docs-h3">{title}</h3>
       {note && <p className="docs-note">{note}</p>}
-      <div className={`docs-stage${dark ? ' docs-stage--dark cr-on-dark' : ''}`}>{children}</div>
+      <div className={`docs-stage${dark ? ' docs-stage--dark cr-on-dark' : ''}${light ? ' cr-on-light' : ''}`}>{children}</div>
       <Code>{code}</Code>
     </div>
   )
@@ -376,6 +376,25 @@ function Components() {
         note="Para un fondo oscuro dentro de una página clara, envolvé el bloque en cr-on-dark. Remapea los tokens semánticos con los valores del modo oscuro, así todos los componentes (no solo los botones) mantienen el contraste sin variantes propias."
         dark
         code={`<section class="cr-on-dark">
+  <button class="cr-btn cr-btn--primary">Ver mi experiencia</button>
+  <button class="cr-btn cr-btn--secondary">Contactarme</button>
+  <button class="cr-btn cr-btn--ghost">Cancelar</button>
+  <a class="cr-link" href="#">Ver más</a>
+  <span class="cr-tag">Figma</span>
+</section>`}
+      >
+        <button className="cr-btn cr-btn--primary">Ver mi experiencia</button>
+        <button className="cr-btn cr-btn--secondary">Contactarme</button>
+        <button className="cr-btn cr-btn--ghost">Cancelar</button>
+        <a className="cr-link" href="#components">Ver más</a>
+        <span className="cr-tag">Figma</span>
+      </Demo>
+
+      <Demo
+        title="Superficie clara"
+        note="Es la versión inversa: un contenedor claro dentro de una página en modo oscuro (por ejemplo, una tarjeta blanca). Envolvé el bloque en cr-on-light y los tokens semánticos toman los valores del modo claro. Cambiá el switch del encabezado a modo oscuro para ver la diferencia."
+        light
+        code={`<section class="cr-on-light">
   <button class="cr-btn cr-btn--primary">Ver mi experiencia</button>
   <button class="cr-btn cr-btn--secondary">Contactarme</button>
   <button class="cr-btn cr-btn--ghost">Cancelar</button>
