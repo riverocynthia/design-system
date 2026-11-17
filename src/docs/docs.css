@@ -273,7 +273,13 @@ code { font-family: var(--font-family-mono); font-size: 0.85em; }
 }
 
 @media (max-width: 560px) {
-  /* "design system" sigue disponible para lectores de pantalla pero no ocupa ancho */
+  .docs-header { gap: var(--space-2); }
+  .docs-brand { padding: 0 var(--space-4); }
+  .docs-header-actions { padding: 0 var(--space-2) 0 var(--space-3); gap: var(--space-2); }
+}
+
+@media (max-width: 369px) {
+  /* En pantallas muy angostas "design system" sigue disponible para lectores de pantalla pero no ocupa ancho */
   .docs-brand small {
     position: absolute;
     width: 1px;
@@ -282,8 +288,6 @@ code { font-family: var(--font-family-mono); font-size: 0.85em; }
     clip-path: inset(50%);
     white-space: nowrap;
   }
-  .docs-brand { padding: 0 var(--space-4); }
-  .docs-header-actions { padding: 0 var(--space-2) 0 var(--space-3); gap: var(--space-2); }
 }
 
 /* Volver al inicio */
