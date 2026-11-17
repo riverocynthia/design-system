@@ -338,7 +338,7 @@ function Components() {
     >
       <Demo
         title="Botón"
-        note="Acción principal con relleno azul de marca y texto blanco (contraste AA); la secundaria es el mismo botón con contorno, y la fantasma no tiene borde."
+        note="Acción principal en naranja con texto oscuro (contraste AA), secundaria y fantasma."
         code={`<button class="cr-btn cr-btn--primary">Ver mi experiencia</button>
 <button class="cr-btn cr-btn--secondary">Descargar CV</button>
 <button class="cr-btn cr-btn--ghost">Cancelar</button>
