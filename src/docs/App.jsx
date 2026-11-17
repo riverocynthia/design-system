@@ -338,7 +338,7 @@ function Components() {
     >
       <Demo
         title="Botón"
-        note="Acción principal en naranja con texto oscuro (contraste AA), secundaria y fantasma."
+        note="Acción principal con relleno azul de marca y texto blanco (contraste AA); la secundaria es el mismo botón con contorno, y la fantasma no tiene borde."
         code={`<button class="cr-btn cr-btn--primary">Ver mi experiencia</button>
 <button class="cr-btn cr-btn--secondary">Descargar CV</button>
 <button class="cr-btn cr-btn--ghost">Cancelar</button>
@@ -741,8 +741,10 @@ export default function App() {
             aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
-              {menuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+            <svg className="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
+              <path d="M4 7h16" />
+              <path d="M4 12h16" />
+              <path d="M4 17h16" />
             </svg>
           </button>
         </div>
